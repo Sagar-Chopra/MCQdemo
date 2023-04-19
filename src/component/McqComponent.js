@@ -42,6 +42,35 @@ const McqComponent = () => {
     }
   };
 
+  const handleLevel = (level) => {
+    switch (level) {
+      case "easy":
+        return (
+          <>
+            <Star />
+            <Star className="star" />
+            <Star className="star" />
+          </>
+        );
+      case "medium":
+        return (
+          <>
+            <Star />
+            <Star />
+            <Star className="star" />
+          </>
+        );
+      case "hard":
+        return (
+          <>
+            <Star />
+            <Star />
+            <Star />
+          </>
+        );
+    }
+  };
+
   const decodeString = (string) => {
     const urlEncodedString = string;
     const simpleString = decodeURIComponent(urlEncodedString);
@@ -58,9 +87,7 @@ const McqComponent = () => {
             style={{ backgroundSize: `${(currentQuestion + 1) * 5}%` }}
           ></input>
           {showScore ? (
-            <p>
-              your have scored {marks} out of {questions.length}
-            </p>
+            <p>your have scored {marks}% out of 100%</p>
           ) : (
             <>
               <div className="question">
@@ -72,7 +99,9 @@ const McqComponent = () => {
                   <span>
                     {decodeString(questions[currentQuestion].category)}
                   </span>
-                  <Star className="star" />
+                </div>
+                <div className="star_div">
+                  {handleLevel(questions[currentQuestion].difficulty)}
                 </div>
                 <div className="question_text">
                   {decodeString(questions[currentQuestion].question)}
@@ -95,23 +124,29 @@ const McqComponent = () => {
                 </div>
               </div>
               <div>
-                {optionClicked ? (
-                  correntAnswer ? (
-                    <div>
-                      <p>Correct !</p>
-                      <button onClick={() => handleNextQuestion()}>
-                        Next Question
-                      </button>
-                    </div>
-                  ) : (
-                    <div>
-                      <p>Sorry Please try again.</p>
-                      <button onClick={() => handleNextQuestion()}>
-                        Next Question
-                      </button>
-                    </div>
-                  )
-                ) : null}
+                {currentQuestion < 19 ? (
+                  optionClicked ? (
+                    correntAnswer ? (
+                      <div>
+                        <p>Correct !</p>
+                        <button onClick={() => handleNextQuestion()}>
+                          Next Question
+                        </button>
+                      </div>
+                    ) : (
+                      <div>
+                        <p>Sorry Please try again.</p>
+                        <button onClick={() => handleNextQuestion()}>
+                          Next Question
+                        </button>
+                      </div>
+                    )
+                  ) : null
+                ) : (
+                  <button onClick={() => handleNextQuestion()}>
+                    Show Marks
+                  </button>
+                )}
               </div>
             </>
           )}

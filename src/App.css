@@ -62,6 +62,7 @@
   outline: none;
   margin: 0;
   background-image: linear-gradient(gray,gray);
+  transition: 5s linear ease-in-out;
 }
 
 .question{
@@ -159,6 +160,14 @@ input[type="range"]::-moz-range-thumb {
   border: 1px solid black;
   background-repeat: no-repeat;
   background-image: linear-gradient(black,black);
+}
+
+.star_div{
+  display: flex;
+}
+
+.star{
+  color: lightgray;
 }
 
 .w-6{
